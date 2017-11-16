@@ -1,0 +1,52 @@
+{{ partial "site_header.html" . }}
+<article>
+  <div class="container">
+    <div class="main-contents">
+
+      <h1>リーグ戦</h1>
+      {{ $year := slice "2017" "2016" "2015"}}
+      {{ range $year }}
+      <div class="contents">
+        <div class="contents__item contents__item--flex-none">{{ . }}年</div>
+        <div class="contents__item">
+          <ul>
+            {{ range where ( where $.Pages "Params.annual" "==" . ) "Params.group" "==" "league" }}
+            <li> <div><a href="{{ .Permalink }}">{{ .Params.season }}{{ .Params.class }}</a></div> </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+      <h1>オープン戦</h1>
+      {{ range $year }}
+      <div class="contents">
+        <div class="contents__item contents__item--flex-none">{{ . }}年</div>
+        <div class="contents__item">
+          <ul>
+            {{ range where ( where $.Pages "Params.annual" "==" . ) "Params.group" "==" "exhibition" }}
+            <li> <div><a href="{{ .Permalink }}">{{ .Params.season }}{{ .Params.class }}</a></div> </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+      <h1>その他の試合</h1>
+      {{ range $year }}
+      <div class="contents">
+        <div class="contents__item contents__item--flex-none">{{ . }}年</div>
+        <div class="contents__item">
+          <ul>
+            {{ range where ( where $.Pages "Params.annual" "==" . ) "Params.group" "==" "others" }}
+            <li> <div><a href="{{ .Permalink }}">{{ .Params.season }}{{ .Params.class }}</a></div> </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+    </div>
+  </div>
+</article>
+{{ partial "site_footer.html" . }}
